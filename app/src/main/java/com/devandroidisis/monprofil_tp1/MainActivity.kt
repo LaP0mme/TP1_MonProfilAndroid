@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
     Box(contentAlignment = Alignment.Center , modifier = modifier.fillMaxSize()) {
-        Column {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
                 painter = painterResource(id = R.drawable.photomonprofil),
                 contentDescription = "My profile picture",
