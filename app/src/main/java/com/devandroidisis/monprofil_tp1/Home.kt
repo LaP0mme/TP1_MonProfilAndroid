@@ -66,7 +66,7 @@ fun Mail(modifier: Modifier = Modifier){
             modifier = modifier.size(20.dp, 20.dp)
         )
         Text(
-            text = "lopezdamien375@gmail.com",
+            text = " lopezdamien375@gmail.com",
             modifier = modifier
         )
     }
@@ -81,7 +81,7 @@ fun LinkedIn(modifier: Modifier = Modifier){
             modifier = modifier.size(20.dp, 20.dp)
         )
         Text(
-            text = "www.linkedin.com/in/damien-lopez",
+            text = " www.linkedin.com/in/damien-lopez",
             modifier = modifier
         )
     }
