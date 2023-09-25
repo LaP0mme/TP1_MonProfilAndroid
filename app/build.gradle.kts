@@ -64,4 +64,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation ("androidx.compose.material3:material3-window-size-class:1.0.0-rc01")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")
+
 }
