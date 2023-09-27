@@ -1,16 +1,16 @@
 package com.devandroidisis.monprofil_tp1
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,18 +20,21 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
 fun PhotoProfil(modifier: Modifier = Modifier) {
-            Image(
-                painter = painterResource(id = R.drawable.photomonprofil),
-                contentDescription = "My profile picture",
-                Modifier.clip(CircleShape).size(230.dp),
-            )
-        }
+    Image(
+        painter = painterResource(id = R.drawable.photomonprofil),
+        contentDescription = "My profile picture",
+        Modifier
+            .clip(CircleShape)
+            .size(230.dp),
+    )
+}
 
 @Composable
-fun Identite(modifier: Modifier = Modifier){
+fun Identite(modifier: Modifier = Modifier) {
     Text(
         text = "Damien Lopez",
         fontWeight = FontWeight.Bold,
@@ -41,7 +44,7 @@ fun Identite(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun Promotion(modifier: Modifier = Modifier){
+fun Promotion(modifier: Modifier = Modifier) {
     Text(
         text = "Etudiant FIE4 - ISIS",
         modifier = modifier
@@ -49,7 +52,7 @@ fun Promotion(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun Ecole(modifier: Modifier = Modifier){
+fun Ecole(modifier: Modifier = Modifier) {
     Text(
         text = "Ecole d'ingénieurs ISIS - INU Champollion'",
         fontStyle = FontStyle.Italic,
@@ -58,7 +61,7 @@ fun Ecole(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun Mail(modifier: Modifier = Modifier){
+fun Mail(modifier: Modifier = Modifier) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Image(
             painter = painterResource(id = R.drawable.email),
@@ -73,7 +76,7 @@ fun Mail(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun LinkedIn(modifier: Modifier = Modifier){
+fun LinkedIn(modifier: Modifier = Modifier) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Image(
             painter = painterResource(id = R.drawable.linkedin),
@@ -88,12 +91,80 @@ fun LinkedIn(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun BouttonDemarrer(modifier: Modifier = Modifier){
-    Button(onClick = { /*TODO*/ }) {
+fun BouttonDemarrer(modifier: Modifier = Modifier, navController: NavController) {
+    Button(onClick = { navController.navigate("MovieListScreen") }, modifier = modifier) {
         Text(text = "Démarrer")
     }
 
+}
+
+@Composable
+fun HomeScreen(navController: NavController, windowClass: WindowSizeClass) {
+    when (windowClass.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> {
+            Column(
+                verticalArrangement = Arrangement.SpaceEvenly,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    PhotoProfil()
+                    Identite()
+                }
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Promotion()
+                    Ecole()
+                }
+                Column {
+                    Mail()
+                    LinkedIn()
+                }
+                Column {
+                    BouttonDemarrer(navController = navController)
+                }
+            }
+        }
+
+        else -> {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceEvenly
+                ) {
+
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        PhotoProfil()
+                        Identite()
+                    }
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Promotion()
+                        Ecole()
+                    }
+                }
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceEvenly
+                ) {
+
+                    Column {
+                        Mail()
+                        LinkedIn()
+                    }
+                    Spacer(modifier = Modifier.size(20.dp))
+                    Column {
+                        BouttonDemarrer(navController = navController)
+                    }
+
+                }
+            }
+        }
     }
+}
+
 
 
 
