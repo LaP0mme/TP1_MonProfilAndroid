@@ -71,5 +71,7 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")
     implementation ("androidx.navigation:navigation-compose:2.7.3")
+    implementation ("io.coil-kt:coil-compose:1.3.0")
+    implementation("androidx.compose.material3:material3-android:1.2.0-alpha08")
 
 }

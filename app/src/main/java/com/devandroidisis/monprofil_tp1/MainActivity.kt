@@ -53,6 +53,12 @@ fun Home( windowClass : WindowSizeClass) {
         composable("MovieListScreen"){
             MovieListScreen(navController, windowClass)
         }
+        composable("SeriesListScreen"){
+            SeriesListScreen(navController, windowClass)
+        }
+        composable("ActeursListScreen"){
+            ActeursListScreen(navController, windowClass)
+        }
     }
 }
 

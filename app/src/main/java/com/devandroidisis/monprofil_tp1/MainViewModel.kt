@@ -9,74 +9,72 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainViewModel : ViewModel() {
-    val movie = MutableStateFlow<TmbMovieList>(TmbMovieList())
-    val serie = MutableStateFlow<TmbSerieList>(TmbSerieList())
-    val person = MutableStateFlow<TmbPersonList>(TmbPersonList())
+    val movies = MutableStateFlow<TmbMovieList>(TmbMovieList())
+    val series = MutableStateFlow<TmbSerieList>(TmbSerieList())
+    val persons = MutableStateFlow<TmbPersonList>(TmbPersonList())
     val movieDetail = MutableStateFlow<TmbMovieDetail>(TmbMovieDetail())
     val serieDetail = MutableStateFlow<TmbSerieDetail>(TmbSerieDetail())
     val personDetail = MutableStateFlow<TmbPersonDetail>(TmbPersonDetail())
 
     val api_key = "f89f9900127ccb4a33497f1decfc4358"
 
-    val Service = Retrofit.Builder()
+    val service = Retrofit.Builder()
         .baseUrl("https://api.themoviedb.org/3/")
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
-        .create(TmbApi::class.java)
+    val api = service.create(com.devandroidisis.monprofil_tp1.TmbApi::class.java)
 
-    fun searchMovie(query: String) {
+    fun getFilmInitiaux(){
         viewModelScope.launch {
-            Service.searchMovie(api_key, "fr", query).results
+            movies.value = api.movieList(api_key, "fr")
+        }
+    }
+    fun getSeriesInitiaux(){
+        viewModelScope.launch {
+            series.value = api.serieList(api_key, "fr")
         }
     }
 
-    fun searchSerie(query: String) {
+    fun getPersonsInitiaux(){
         viewModelScope.launch {
-            Service.searchSerie(api_key, "fr", query).results
+            persons.value = api.personList(api_key,"fr")
         }
     }
 
-    fun searchPerson(query: String) {
+    fun getMovieDetail(movieid: String){
         viewModelScope.launch {
-            Service.searchPerson(api_key, "fr", query).results
+            movieDetail.value = api.movieDetail(movieid, api_key, "fr")
         }
     }
 
-    fun getMovieList() {
+    fun getSerieDetail(serieid: String){
         viewModelScope.launch {
-            Service.movieList(api_key, "fr").results
+            serieDetail.value = api.serieDetail(serieid, api_key, "fr")
         }
     }
 
-    fun getSerieList() {
+    fun getPersonDetail(personid: String){
         viewModelScope.launch {
-            Service.serieList(api_key, "fr").results
+            personDetail.value = api.personDetail(personid, api_key, "fr")
         }
     }
 
-    fun getPersonList() {
+    fun getMovieSearch(query: String){
         viewModelScope.launch {
-            Service.personList(api_key, "fr").results
+            movies.value = api.searchMovie(query, api_key, "fr")
         }
     }
 
-    fun getMovieDetail(movieID: String) {
+    fun getSerieSearch(query: String){
         viewModelScope.launch {
-            Service.movieDetail(movieID, api_key, "fr")
+            series.value = api.searchSerie(query, api_key, "fr")
         }
     }
 
-    fun getSerieDetail(serieID: String) {
+    fun getPersonSearch(query: String){
         viewModelScope.launch {
-            Service.serieDetail(serieID, api_key, "fr")
+            persons.value = api.searchPerson(query, api_key, "fr")
         }
     }
 
-    fun getPersonDetail(personID: String) {
-        viewModelScope.launch {
-            Service.personDetail(personID, api_key, "fr")
-        }
-    }
 }
-
-

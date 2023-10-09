@@ -37,7 +37,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 
 
-class MovieListActivity : ComponentActivity() {
+class SeriesListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -58,21 +58,21 @@ class MovieListActivity : ComponentActivity() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieListScreen(navController: NavController, windowClass: WindowSizeClass) {
+fun SeriesListScreen(navController: NavController, windowClass: WindowSizeClass) {
     val mainViewModel: MainViewModel = viewModel()
     when (windowClass.widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
             Scaffold(
                 topBar = {
-                         TopNavBar(navController, windowClass)
+                    TopNavBar(navController, windowClass)
                 },
                 bottomBar = {
-                        BottomNavBar(navController, windowClass, filmBoolean = true,
-                            seriesBoolean = false, personBoolean = false)
+                    BottomNavBar(navController, windowClass, filmBoolean = false,
+                        seriesBoolean = true, personBoolean = false)
                 },
             ) {
                 val modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)
-                MovieList(mainViewModel, navController, modifier = modifier)
+                SeriesList(mainViewModel, navController, modifier = modifier)
             }
         }
 
@@ -117,17 +117,17 @@ fun MovieListScreen(navController: NavController, windowClass: WindowSizeClass) 
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieList (movieViewModel : MainViewModel, navController: NavController, nbColumn: Int = 2, modifier: Modifier){
-    val movies by movieViewModel.movies.collectAsState()
+fun SeriesList (seriesViewModel : MainViewModel, navController: NavController, nbColumn: Int = 2, modifier: Modifier){
+    val series by seriesViewModel.series.collectAsState()
 
-    if(movies.results.isEmpty()){
-        movieViewModel.getFilmInitiaux()
+    if(series.results.isEmpty()){
+        seriesViewModel.getSeriesInitiaux()
     }
-    if (movies.results.isNotEmpty()) {
+    if (series.results.isNotEmpty()) {
         LazyVerticalGrid(columns = GridCells.Fixed(nbColumn), modifier = modifier) {
-            items(movies.results) { movie ->
+            items(series.results) { serie ->
                 FloatingActionButton(
-                    onClick = {navController.navigate("DetailMovie/${movie.id}")},
+                    onClick = {navController.navigate("DetailSerie/${serie.id}")},
                     modifier = Modifier.padding(20.dp),
                     containerColor = Color.White,
                 ) {
@@ -137,7 +137,7 @@ fun MovieList (movieViewModel : MainViewModel, navController: NavController, nbC
                             modifier = Modifier.fillMaxSize()) {
                             Image(
                                 painter = rememberImagePainter(
-                                    data = "https://image.tmdb.org/t/p/w780" + movie.poster_path,
+                                    data = "https://image.tmdb.org/t/p/w780" + serie.poster_path,
                                     builder = {
                                         crossfade(true)
                                         size(
@@ -145,16 +145,16 @@ fun MovieList (movieViewModel : MainViewModel, navController: NavController, nbC
                                             400
                                         )
                                     }),
-                                contentDescription = "Image film ${movie.title}",
+                                contentDescription = "Image serie ${serie.name}",
                                 Modifier.padding(start = 5.dp, end = 5.dp)
                             )
                         }
                         Column(horizontalAlignment = Alignment.Start, modifier = Modifier.padding(start = 10.dp)){
-                            Text(text = movie.title,
+                            Text(text = serie.name,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.Black,
                                 modifier = Modifier.padding(top = 5.dp))
-                            Text(text = movie.release_date,
+                            Text(text = serie.first_air_date,
                                 color = Color.Black,
                                 modifier = Modifier.padding(top = 15.dp))
                         }

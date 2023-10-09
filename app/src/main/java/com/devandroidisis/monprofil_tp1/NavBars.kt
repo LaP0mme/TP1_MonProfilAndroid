@@ -1,19 +1,14 @@
 package com.devandroidisis.monprofil_tp1
 
-import android.graphics.drawable.Icon
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,19 +16,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.devandroidisis.monprofil_tp1.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,9 +55,9 @@ fun TopNavBar(navController: NavController, windowClass: WindowSizeClass) {
 @Composable
 fun BottomNavBar(
     navController: NavController, windowClass: WindowSizeClass, filmBoolean: Boolean = false,
-    seriesBoolean: Boolean = false, favorisBoolean: Boolean = false
-) {
-    val tintPerson = if (favorisBoolean) Color.White else Color.Black
+    seriesBoolean: Boolean = false, personBoolean: Boolean = false)
+{
+    val tintPerson = if (personBoolean) Color.White else Color.Black
     val tintFilm = if (filmBoolean) Color.White else Color.Black
     val tintSerie = if (seriesBoolean) Color.White else Color.Black
 
@@ -78,21 +68,27 @@ fun BottomNavBar(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                IconButton(onClick = { /*navController.navigate("HomeScreen")*/ }) {
+                IconButton(onClick = { navController.navigate("MovieListScreen") },
+                    modifier = Modifier.size(80.dp)) {
                     Column(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.movie_24px),
-                            contentDescription = "Home",
-                            tint = tintFilm
+                            contentDescription = "Movies_Button",
+                            tint = tintFilm,
+                            modifier = Modifier.size(35.dp)
                         )
-                        Text("Films")
+                        Text(
+                            text = "Films",
+                            fontSize = 15.sp,
+                            color = tintFilm)
                     }
                 }
 
-                IconButton(onClick = { /*navController.navigate("HomeScreen")*/ }) {
+                IconButton(onClick = { navController.navigate("SeriesListScreen") },
+                modifier = Modifier.size(80.dp)) {
                     Column(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
@@ -100,14 +96,20 @@ fun BottomNavBar(
                         Icon(
                             painter = painterResource(id = R.drawable.tv_24px),
                             contentDescription = "Tv_Button",
-                            tint = tintSerie
+                            tint = tintSerie,
+                            modifier = Modifier.size(35.dp)
                         )
-                        Text("Series")
+                        Text(
+                            text = "Series",
+                            fontSize = 15.sp,
+                            color = tintSerie
+                        )
                     }
 
                 }
 
-                IconButton(onClick = { /*navController.navigate("HomeScreen")*/ }) {
+                IconButton(onClick = { navController.navigate("ActeursListScreen") },
+                    modifier = Modifier.size(80.dp)) {
                     Column(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
@@ -115,12 +117,16 @@ fun BottomNavBar(
                         Icon(
                             painter = painterResource(id = R.drawable.person_24px),
                             contentDescription = "Person_Button",
-                            tint = tintPerson
+                            tint = tintPerson,
+                            modifier = Modifier.size(35.dp)
                         )
-                        Text("Favoris")
+                        Text(
+                            text= "Acteurs",
+                            fontSize = 15.sp,
+                            color = tintPerson)
                     }
                 }
             }
-        }
+        },
     )
 }
