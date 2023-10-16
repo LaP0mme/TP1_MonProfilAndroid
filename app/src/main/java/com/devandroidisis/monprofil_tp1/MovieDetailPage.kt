@@ -88,7 +88,7 @@ fun MovieDetailScreen(navController: NavController, filmId: String, windowSizeCl
                                 crossfade(true)
                                 size(600, 600)
                             }),
-                        contentDescription = "Image film ${movie.title}",
+                        contentDescription = "Titre du film ${movie.title}",
                         Modifier
                             .padding(start = 15.dp, end = 15.dp)
                             .fillMaxWidth()
@@ -108,7 +108,7 @@ fun MovieDetailScreen(navController: NavController, filmId: String, windowSizeCl
                                 crossfade(true)
                                 size(400, 400)
                             }),
-                        contentDescription = "Image film ${movie.title}",
+                        contentDescription = "Titre du film ${movie.title}",
                         Modifier.padding(start = 25.dp, end = 10.dp, top = 5.dp)
                     )
                     Column(
@@ -118,7 +118,7 @@ fun MovieDetailScreen(navController: NavController, filmId: String, windowSizeCl
                     ) {
 
                         Text(
-                            text = movie.genres.toString(),
+                            text = getGenres(movie.genres),
                             fontStyle = FontStyle.Italic,
                             modifier = Modifier.padding(top = 15.dp, end = 15.dp)
                         )
@@ -156,7 +156,7 @@ fun MovieDetailScreen(navController: NavController, filmId: String, windowSizeCl
                 }
                 items(movie.credits.cast.take(10)){ cast ->
                     FloatingActionButton(
-                        onClick = { navController.navigate("DetailPerson/${cast.id}") },
+                        onClick = { navController.navigate("ActeurDetailScreen/${cast.id}") },
                         modifier = Modifier.padding(20.dp),
                         containerColor = Color.White,
                     ) {
@@ -179,7 +179,7 @@ fun MovieDetailScreen(navController: NavController, filmId: String, windowSizeCl
                                                 400
                                             )
                                         }),
-                                    contentDescription = "Image film ${cast.name}",
+                                    contentDescription = "nom du casting ${cast.name}",
                                     Modifier.padding(start = 5.dp, end = 5.dp)
                                 )
                                 Text(
@@ -202,5 +202,12 @@ fun MovieDetailScreen(navController: NavController, filmId: String, windowSizeCl
             }
         }
     }
+}
+fun getGenres(genres: List<Genre>): String {
+    var genresString = ""
+    for (genre in genres) {
+        genresString += genre.name + " , "
+    }
+    return genresString.dropLast(2)
 }
 

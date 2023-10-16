@@ -63,6 +63,16 @@ fun Home( windowClass : WindowSizeClass) {
             Log.d("Home", "Home: $filmId")
             MovieDetailScreen(navController, filmId, windowClass)
         }
+        composable("SerieDetailScreen/{serieid}"){ IdValue ->
+            val serieId = IdValue.arguments?.getString("serieid") ?: ""
+            Log.d("Home", "Home: $serieId")
+            SerieDetailScreen(navController, serieId)
+        }
+        composable("ActeurDetailScreen/{acteurid}"){ IdValue ->
+            val acteurId = IdValue.arguments?.getString("acteurid") ?: ""
+            Log.d("Home", "Home: $acteurId")
+            ActeurDetailScreen(acteurId)
+        }
     }
 }
 
