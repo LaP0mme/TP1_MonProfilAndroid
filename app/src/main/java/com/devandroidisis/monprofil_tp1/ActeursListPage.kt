@@ -128,7 +128,7 @@ fun ActeurList (acteursViewModel : MainViewModel, navController: NavController, 
         LazyVerticalGrid(columns = GridCells.Fixed(nbColumn), modifier = modifier) {
             items(acteurs.results) { acteur ->
                 FloatingActionButton(
-                        onClick = {navController.navigate("DetailSerie/${acteur.id}")},
+                        onClick = {navController.navigate("ActeurDetailScreen/${acteur.id}")},
                     modifier = Modifier.padding(20.dp),
                     containerColor = Color.White,
                 ) {
@@ -146,7 +146,7 @@ fun ActeurList (acteursViewModel : MainViewModel, navController: NavController, 
                                             400
                                         )
                                     }),
-                                contentDescription = "Image serie ${acteur.name}",
+                                contentDescription = "Photo acteur ${acteur.name}",
                                 Modifier.padding(start = 5.dp, end = 5.dp)
                             )
                         }

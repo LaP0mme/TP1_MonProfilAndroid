@@ -127,7 +127,7 @@ fun SeriesList (seriesViewModel : MainViewModel, navController: NavController, n
         LazyVerticalGrid(columns = GridCells.Fixed(nbColumn), modifier = modifier) {
             items(series.results) { serie ->
                 FloatingActionButton(
-                    onClick = {navController.navigate("DetailSerie/${serie.id}")},
+                    onClick = {navController.navigate("SerieDetailScreen/${serie.id}")},
                     modifier = Modifier.padding(20.dp),
                     containerColor = Color.White,
                 ) {

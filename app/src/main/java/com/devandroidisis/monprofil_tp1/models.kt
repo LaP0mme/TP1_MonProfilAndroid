@@ -5,7 +5,7 @@ data class TmbMovieDetail(
     val adult: Boolean = false,
     val backdrop_path: String = "",
     val genre_ids: List<Int> = listOf(),
-    val id: Int = 0,
+    val id: String = "",
     val original_language: String = "",
     val original_title: String = "",
     val overview: String = "",
@@ -25,11 +25,11 @@ data class Credits(
 )
 data class Cast(
     val adult: Boolean,
-    val cast_id: Int,
+    val cast_id: String,
     val character: String,
     val credit_id: String,
     val gender: Int,
-    val id: Int,
+    val id: String,
     val known_for_department: String,
     val name: String,
     val order: Int,
@@ -122,19 +122,28 @@ data class TmbSerieDetail(
     val popularity: Double = 0.0,
     val poster_path: String = "",
     val vote_average: Double = 0.0,
-    val vote_count: Int = 0
+    val vote_count: Int = 0,
+    val genres: List<Genre> = listOf(),
+    val credits: Credits = Credits()
 )
 
 data class TmbPersonDetail(
     val adult: Boolean = false,
+    val also_known_as: List<String> = listOf(),
+    val biography: String = "",
+    val birthday: String = "",
+    val deathday: Any = Any(),
     val gender: Int = 0,
+    val homepage: Any = Any(),
     val id: String = "",
-    val known_for: List<KnownForPersonDetail> = listOf(),
+    val imdb_id: String = "",
     val known_for_department: String = "",
     val name: String = "",
-    val original_name: String = "",
+    val place_of_birth: String = "",
     val popularity: Double = 0.0,
-    val profile_path: String = ""
+    val profile_path: String = "",
+    val known_for: List<KnownForPersonDetail> = listOf(),
+
 )
 
 data class KnownForPersonDetail(
@@ -156,8 +165,8 @@ data class KnownForPersonDetail(
     val title: String = "",
     val video: Boolean = false,
     val vote_average: Double = 0.0,
-    val vote_count: Int = 0
-)
+    val vote_count: Int = 0,
+    )
 
 data class TmbPersonList(
     val page: Int = 0,

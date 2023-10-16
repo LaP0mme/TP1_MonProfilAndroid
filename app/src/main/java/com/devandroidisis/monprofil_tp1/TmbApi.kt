@@ -18,8 +18,8 @@ interface TmbApi {
     suspend fun serieList(@Query("api_key") apiKey: String,
                           @Query("language") language: String) : TmbSerieList
 
-    @GET("tv/{tv_id}?append_to_response=credits")
-    suspend fun serieDetail(@Path("tv_id") serieID: String,
+    @GET("tv/{id}?append_to_response=credits")
+    suspend fun serieDetail(@Path("id") id: String,
                             @Query("api_key") apiKey: String,
                             @Query("language") language: String) : TmbSerieDetail
 
@@ -27,8 +27,8 @@ interface TmbApi {
     suspend fun personList(@Query("api_key") apiKey: String,
                            @Query("language") language: String) : TmbPersonList
 
-    @GET("person/{person_id}")
-    suspend fun personDetail(@Path("person_id") personID: String,
+    @GET("person/{id}")
+    suspend fun personDetail(@Path("id") id: String,
                              @Query("api_key") apiKey: String,
                              @Query("language") language: String) : TmbPersonDetail
 
