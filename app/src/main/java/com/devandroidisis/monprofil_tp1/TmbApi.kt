@@ -9,8 +9,8 @@ interface TmbApi {
     suspend fun movieList(@Query("api_key") apiKey: String,
                           @Query("language") language: String) : TmbMovieList
 
-    @GET("movie/{movie_id}?append_to_response=credits")
-    suspend fun movieDetail(@Path("movie_id") movieID: String,
+    @GET("movie/{id}?append_to_response=credits")
+    suspend fun movieDetail(@Path("id") id: String,
                             @Query("api_key") apiKey: String,
                             @Query("language") language: String) : TmbMovieDetail
 

@@ -2,6 +2,7 @@ package com.devandroidisis.monprofil_tp1
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -127,7 +128,9 @@ fun MovieList (movieViewModel : MainViewModel, navController: NavController, nbC
         LazyVerticalGrid(columns = GridCells.Fixed(nbColumn), modifier = modifier) {
             items(movies.results) { movie ->
                 FloatingActionButton(
-                    onClick = {navController.navigate("DetailMovie/${movie.id}")},
+                    onClick = {
+                        Log.d("MovieList", "MovieList: ${movie.id}")
+                        navController.navigate("MovieDetailScreen/${movie.id}")},
                     modifier = Modifier.padding(20.dp),
                     containerColor = Color.White,
                 ) {

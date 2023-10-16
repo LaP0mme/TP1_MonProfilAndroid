@@ -1,6 +1,7 @@
 package com.devandroidisis.monprofil_tp1
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,8 +33,6 @@ class MainActivity : ComponentActivity() {
                     Home(windowSizeClass)
                 }
 
-
-
             }
         }
     }
@@ -58,6 +57,11 @@ fun Home( windowClass : WindowSizeClass) {
         }
         composable("ActeursListScreen"){
             ActeursListScreen(navController, windowClass)
+        }
+        composable("MovieDetailScreen/{movieid}"){ IdValue ->
+            val filmId = IdValue.arguments?.getString("movieid") ?: ""
+            Log.d("Home", "Home: $filmId")
+            MovieDetailScreen(navController, filmId, windowClass)
         }
     }
 }
