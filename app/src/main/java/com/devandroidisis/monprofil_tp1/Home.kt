@@ -21,7 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.devandroidisis.monprofil_tp1.R
 
 @Composable
 fun PhotoProfil(modifier: Modifier = Modifier) {
@@ -125,7 +124,6 @@ fun HomeScreen(navController: NavController, windowClass: WindowSizeClass) {
                 }
             }
         }
-
         else -> {
             Row(
                 verticalAlignment = Alignment.CenterVertically,

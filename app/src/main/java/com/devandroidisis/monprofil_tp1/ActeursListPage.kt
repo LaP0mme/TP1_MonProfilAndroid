@@ -65,7 +65,7 @@ fun ActeursListScreen(navController: NavController, windowClass: WindowSizeClass
         WindowWidthSizeClass.Compact -> {
             Scaffold(
                 topBar = {
-                    TopNavBar(navController, windowClass)
+                    TopNavBar(navController)
                 },
                 bottomBar = {
                     BottomNavBar(navController, windowClass, filmBoolean = false,

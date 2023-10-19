@@ -71,6 +71,10 @@ fun Home( windowClass : WindowSizeClass) {
             val acteurId = IdValue.arguments?.getString("acteurid") ?: ""
             ActeurDetailScreen(navController, acteurId)
         }
+        composable("SearchScreen/{search}"){searchValue ->
+            val search = searchValue.arguments?.getString("search") ?: ""
+            SearchScreen(navController, search)
+        }
     }
 }
 
