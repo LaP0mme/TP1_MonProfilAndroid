@@ -54,7 +54,7 @@ fun TopNavBar(navController: NavController) {
                 titleContentColor = Color.White
             ),
             title = {
-                Text(text = if (searchActive) "" else "TMDB") // Masquer le texte quand la recherche est active
+                Text(text = if (searchActive) "" else "TurboApp") // Masquer le texte quand la recherche est active
             },
             navigationIcon = {
                 IconButton(onClick = { navController.navigate("HomeScreen") }) {
