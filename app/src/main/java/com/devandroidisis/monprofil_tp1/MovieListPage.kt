@@ -9,11 +9,8 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -73,52 +70,25 @@ fun MovieListScreen(navController: NavController, windowClass: WindowSizeClass) 
                 },
             ) {
                 val modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)
-                MovieList(mainViewModel, navController, modifier = modifier)
+                MovieList(mainViewModel, navController, nbColumn = 2, modifier = modifier)
             }
         }
-
-        else -> {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceEvenly
-                ) {
-
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        PhotoProfil()
-                        Identite()
-                    }
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Promotion()
-                        Ecole()
-                    }
-                }
-
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceEvenly
-                ) {
-
-                    Column {
-                        Mail()
-                        LinkedIn()
-                    }
-                    Spacer(modifier = Modifier.size(20.dp))
-                    Column {
-                        BouttonDemarrer(navController = navController)
-                    }
-
+            else -> {
+                Scaffold(
+                    topBar = {
+                        LeftNavBar(navController, windowClass, filmBoolean = true,
+                            seriesBoolean = false, personBoolean = false)
+                    }) {
+                    val modifier = Modifier.padding(start= 80.dp)
+                    MovieList(mainViewModel, navController, nbColumn = 3 ,modifier = modifier)
                 }
             }
         }
     }
-}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieList (movieViewModel : MainViewModel, navController: NavController, nbColumn: Int = 2, modifier: Modifier){
+fun MovieList (movieViewModel : MainViewModel, navController: NavController, nbColumn: Int, modifier: Modifier){
     val movies by movieViewModel.movies.collectAsState()
 
     if(movies.results.isEmpty()){

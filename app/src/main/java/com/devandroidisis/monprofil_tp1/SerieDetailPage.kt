@@ -18,6 +18,8 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -50,10 +52,15 @@ class SerieDetailPage : ComponentActivity() {
         }
     }
 }
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun SerieDetailScreen (navController: NavController, serieId: String) {
+fun SerieDetailScreen(
+    navController: NavController,
+    serieId: String,
+    windowSizeClass: WindowSizeClass
+) {
     val serieDetailVM: MainViewModel = viewModel()
     val serie by serieDetailVM.serieDetail.collectAsState()
 
@@ -96,16 +103,24 @@ fun SerieDetailScreen (navController: NavController, serieId: String) {
                     verticalAlignment = Alignment.Top,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Image(
-                        painter = rememberImagePainter(
-                            data = "https://image.tmdb.org/t/p/w1280" + serie.poster_path,
-                            builder = {
-                                crossfade(true)
-                                size(400, 400)
-                            }),
-                        contentDescription = "Titre du film ${serie.name}",
-                        Modifier.padding(start = 25.dp, end = 10.dp, top = 5.dp)
-                    )
+                    when (windowSizeClass.widthSizeClass) {
+                        WindowWidthSizeClass.Compact -> {
+                            Image(
+                                painter = rememberImagePainter(
+                                    data = "https://image.tmdb.org/t/p/w1280" + serie.poster_path,
+                                    builder = {
+                                        crossfade(true)
+                                        size(400, 400)
+                                    }),
+                                contentDescription = "Titre du film ${serie.name}",
+                                Modifier.padding(start = 25.dp, end = 10.dp, top = 5.dp)
+                            )
+                        }
+
+                        else -> {
+                            null
+                        }
+                    }
                     Column(
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -120,6 +135,7 @@ fun SerieDetailScreen (navController: NavController, serieId: String) {
                     }
                 }
             }
+
             // Synopsis
             item {
                 Column(
@@ -139,7 +155,7 @@ fun SerieDetailScreen (navController: NavController, serieId: String) {
                     )
                 }
             }
-            if(serie.credits.cast.isNotEmpty()){
+            if (serie.credits.cast.isNotEmpty()) {
                 item {
                     Text(
                         text = "Têtes d'affiches",
@@ -149,7 +165,7 @@ fun SerieDetailScreen (navController: NavController, serieId: String) {
                         modifier = Modifier.padding(top = 15.dp, end = 15.dp)
                     )
                 }
-                items(serie.credits.cast.take(10)){ cast ->
+                items(serie.credits.cast.take(10)) { cast ->
                     FloatingActionButton(
                         onClick = { navController.navigate("ActeurDetailScreen/${cast.id}") },
                         modifier = Modifier.padding(20.dp),
@@ -198,3 +214,4 @@ fun SerieDetailScreen (navController: NavController, serieId: String) {
         }
     }
 }
+

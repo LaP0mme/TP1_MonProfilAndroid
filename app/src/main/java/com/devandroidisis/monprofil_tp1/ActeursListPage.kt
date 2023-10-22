@@ -8,11 +8,8 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -73,52 +70,25 @@ fun ActeursListScreen(navController: NavController, windowClass: WindowSizeClass
                 },
             ) {
                 val modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)
-                ActeurList(mainViewModel, navController, modifier = modifier)
+                ActeurList(mainViewModel, navController, nbColumn = 2,modifier = modifier)
             }
         }
 
         else -> {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceEvenly
-                ) {
-
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        PhotoProfil()
-                        Identite()
-                    }
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Promotion()
-                        Ecole()
-                    }
-                }
-
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceEvenly
-                ) {
-
-                    Column {
-                        Mail()
-                        LinkedIn()
-                    }
-                    Spacer(modifier = Modifier.size(20.dp))
-                    Column {
-                        BouttonDemarrer(navController = navController)
-                    }
-
-                }
+            Scaffold(
+                topBar = {
+                    LeftNavBar(navController, windowClass, filmBoolean = false,
+                        seriesBoolean = true, personBoolean = true)
+                }) {
+                val modifier = Modifier.padding(start= 80.dp)
+                ActeurList(mainViewModel, navController, nbColumn = 3 ,modifier = modifier)
             }
         }
     }
 }
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalCoilApi::class)
 @Composable
-fun ActeurList (acteursViewModel : MainViewModel, navController: NavController, nbColumn: Int = 2, modifier: Modifier){
+fun ActeurList (acteursViewModel : MainViewModel, navController: NavController, nbColumn: Int, modifier: Modifier){
     val acteurs by acteursViewModel.persons.collectAsState()
 
     if(acteurs.results.isEmpty()){

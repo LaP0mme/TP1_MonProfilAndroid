@@ -65,7 +65,7 @@ fun Home( windowClass : WindowSizeClass) {
         composable("SerieDetailScreen/{serieid}"){ IdValue ->
             val serieId = IdValue.arguments?.getString("serieid") ?: ""
             Log.d("SerieHome", "Home: $serieId")
-            SerieDetailScreen(navController, serieId)
+            SerieDetailScreen(navController, serieId, windowClass)
         }
         composable("ActeurDetailScreen/{acteurid}"){ IdValue ->
             val acteurId = IdValue.arguments?.getString("acteurid") ?: ""
@@ -73,7 +73,7 @@ fun Home( windowClass : WindowSizeClass) {
         }
         composable("SearchScreen/{search}"){searchValue ->
             val search = searchValue.arguments?.getString("search") ?: ""
-            SearchScreen(navController, search)
+            SearchScreen(navController, search, windowClass)
         }
     }
 }

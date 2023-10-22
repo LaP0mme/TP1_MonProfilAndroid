@@ -20,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -101,16 +102,23 @@ fun MovieDetailScreen(navController: NavController, filmId: String, windowSizeCl
                     verticalAlignment = Alignment.Top,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Image(
-                        painter = rememberImagePainter(
-                            data = "https://image.tmdb.org/t/p/w1280" + movie.poster_path,
-                            builder = {
-                                crossfade(true)
-                                size(400, 400)
-                            }),
-                        contentDescription = "Titre du film ${movie.title}",
-                        Modifier.padding(start = 25.dp, end = 10.dp, top = 5.dp)
-                    )
+                    when (windowSizeClass.widthSizeClass) {
+                        WindowWidthSizeClass.Compact -> {
+                            Image(
+                                painter = rememberImagePainter(
+                                    data = "https://image.tmdb.org/t/p/w1280" + movie.poster_path,
+                                    builder = {
+                                        crossfade(true)
+                                        size(400, 400)
+                                    }),
+                                contentDescription = "Titre du film ${movie.title}",
+                                Modifier.padding(start = 25.dp, end = 10.dp, top = 5.dp)
+                            )
+                        }
+                        else -> {
+                            null
+                        }
+                    }
                     Column(
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally,

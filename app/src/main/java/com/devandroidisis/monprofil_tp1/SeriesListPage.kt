@@ -8,11 +8,8 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -35,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+
 
 
 class SeriesListActivity : ComponentActivity() {
@@ -72,52 +70,30 @@ fun SeriesListScreen(navController: NavController, windowClass: WindowSizeClass)
                 },
             ) {
                 val modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)
-                SeriesList(mainViewModel, navController, modifier = modifier)
+                SeriesList(mainViewModel, navController, nbColumn = 2 ,modifier = modifier)
             }
         }
 
         else -> {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceEvenly
-                ) {
-
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        PhotoProfil()
-                        Identite()
-                    }
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Promotion()
-                        Ecole()
-                    }
-                }
-
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceEvenly
-                ) {
-
-                    Column {
-                        Mail()
-                        LinkedIn()
-                    }
-                    Spacer(modifier = Modifier.size(20.dp))
-                    Column {
-                        BouttonDemarrer(navController = navController)
-                    }
-
-                }
+            Scaffold(
+                topBar = {
+                    LeftNavBar(navController, windowClass, filmBoolean = false,
+                        seriesBoolean = true, personBoolean = false)
+                }) {
+                val modifier = Modifier.padding(start= 80.dp)
+                SeriesList(mainViewModel, navController, nbColumn = 3 ,modifier = modifier)
             }
+
+
+                }
+
         }
-    }
 }
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SeriesList (seriesViewModel : MainViewModel, navController: NavController, nbColumn: Int = 2, modifier: Modifier){
+fun SeriesList (seriesViewModel : MainViewModel, navController: NavController, nbColumn: Int, modifier: Modifier){
     val series by seriesViewModel.series.collectAsState()
 
     if(series.results.isEmpty()){
