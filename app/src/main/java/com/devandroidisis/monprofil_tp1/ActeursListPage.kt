@@ -100,7 +100,7 @@ fun ActeurList (acteursViewModel : MainViewModel, navController: NavController, 
                 FloatingActionButton(
                         onClick = {navController.navigate("ActeurDetailScreen/${acteur.id}")},
                     modifier = Modifier.padding(20.dp),
-                    containerColor = Color.White,
+                    containerColor = Color(89, 131, 129),
                 ) {
                     Column( verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize()) {
                         Column( verticalArrangement = Arrangement.Center,

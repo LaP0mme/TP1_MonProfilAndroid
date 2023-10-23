@@ -105,7 +105,7 @@ fun SeriesList (seriesViewModel : MainViewModel, navController: NavController, n
                 FloatingActionButton(
                     onClick = {navController.navigate("SerieDetailScreen/${serie.id}")},
                     modifier = Modifier.padding(20.dp),
-                    containerColor = Color.White,
+                    containerColor = Color(89, 131, 129),
                 ) {
                     Column( verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize()) {
                         Column( verticalArrangement = Arrangement.Center,

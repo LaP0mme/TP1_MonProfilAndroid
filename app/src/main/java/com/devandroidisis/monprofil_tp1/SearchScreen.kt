@@ -49,7 +49,7 @@ fun SearchScreen(navController: NavController, search: String, windowClass: Wind
                     TopNavBar(navController)
                 }
             ) {
-                val modifier = Modifier.fillMaxSize()
+                val modifier = Modifier.padding(top = 60.dp)
                 SearchComposable(navController, search, modifier)
             }
         }
@@ -81,14 +81,14 @@ fun SearchComposable(navController: NavController, search: String, modifier: Mod
 
     Column(
         verticalArrangement = Arrangement.Center,
-        modifier = Modifier.padding(top = 60.dp)
+        modifier = modifier.fillMaxSize()
     ) {
         Text(
             text = "Résultats pour : $search",
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
             modifier = Modifier
-                .padding(top = 10.dp, bottom = 10.dp)
+                .padding(top = 10.dp)
                 .align(CenterHorizontally)
         )
         // FilterChip avec : Tout, Films, Série, Acteurs pour trier la recherche
@@ -203,7 +203,7 @@ fun SearchComposable(navController: NavController, search: String, modifier: Mod
         val Acteurs by SearchViewModel.persons.collectAsState()
 
         LazyColumn(
-            modifier = Modifier.padding(top = 20.dp, bottom = 20.dp),
+            modifier = Modifier.padding(top = 5.dp),
             content = {
                 item {
                     if (searchedMovie || searchedAll) {
@@ -213,7 +213,7 @@ fun SearchComposable(navController: NavController, search: String, modifier: Mod
                             fontWeight = FontWeight.Bold,
                             fontSize = 15.sp,
                             modifier = Modifier
-                                .padding(top = 10.dp, bottom = 10.dp)
+                                .padding(bottom = 10.dp)
                         )
                         if (movies.results.isNotEmpty()) {
                             LazyRow() {
@@ -221,7 +221,7 @@ fun SearchComposable(navController: NavController, search: String, modifier: Mod
                                     FloatingActionButton(
                                         onClick = { navController.navigate("MovieDetailScreen/${movie.id}") },
                                         modifier = Modifier.padding(20.dp),
-                                        containerColor = Color.White
+                                        containerColor = Color(89, 131, 129)
                                     ) {
                                         Column(
                                             verticalArrangement = Arrangement.Center,
@@ -260,7 +260,7 @@ fun SearchComposable(navController: NavController, search: String, modifier: Mod
                             fontWeight = FontWeight.Bold,
                             fontSize = 15.sp,
                             modifier = Modifier
-                                .padding(top = 10.dp, bottom = 10.dp)
+                                .padding(bottom = 10.dp)
                         )
                         if (series.results.isNotEmpty()) {
                             LazyRow() {
@@ -268,7 +268,7 @@ fun SearchComposable(navController: NavController, search: String, modifier: Mod
                                     FloatingActionButton(
                                         onClick = { navController.navigate("SerieDetailScreen/${serie.id}") },
                                         modifier = Modifier.padding(20.dp),
-                                        containerColor = Color.White
+                                        containerColor = Color(89, 131, 129)
                                     ) {
                                         Column(
                                             verticalArrangement = Arrangement.Center,
@@ -307,7 +307,7 @@ fun SearchComposable(navController: NavController, search: String, modifier: Mod
                             fontWeight = FontWeight.Bold,
                             fontSize = 15.sp,
                             modifier = Modifier
-                                .padding(top = 10.dp, bottom = 10.dp)
+                                .padding(bottom = 10.dp)
                         )
                         if (Acteurs.results.isNotEmpty()) {
                             LazyRow() {
@@ -315,7 +315,7 @@ fun SearchComposable(navController: NavController, search: String, modifier: Mod
                                     FloatingActionButton(
                                         onClick = { navController.navigate("ActeurDetailScreen/${Acteur.id}") },
                                         modifier = Modifier.padding(20.dp),
-                                        containerColor = Color.White
+                                        containerColor = Color(89, 131, 129)
                                     ) {
                                         Column(
                                             verticalArrangement = Arrangement.Center,

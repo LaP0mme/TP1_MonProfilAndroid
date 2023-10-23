@@ -47,9 +47,7 @@ class MovieDetailPage : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-
             }
-
         }
     }
 }
@@ -166,7 +164,7 @@ fun MovieDetailScreen(navController: NavController, filmId: String, windowSizeCl
                     FloatingActionButton(
                         onClick = { navController.navigate("ActeurDetailScreen/${cast.id}") },
                         modifier = Modifier.padding(20.dp),
-                        containerColor = Color.White,
+                        containerColor = Color(162, 173, 89),
                     ) {
                         Column(
                             verticalArrangement = Arrangement.Center,

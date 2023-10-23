@@ -102,7 +102,7 @@ fun MovieList (movieViewModel : MainViewModel, navController: NavController, nbC
                         Log.d("MovieList", "MovieList: ${movie.id}")
                         navController.navigate("MovieDetailScreen/${movie.id}")},
                     modifier = Modifier.padding(20.dp),
-                    containerColor = Color.White,
+                    containerColor = Color(89, 131, 129),
                 ) {
                     Column( verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize()) {
                         Column( verticalArrangement = Arrangement.Center,
